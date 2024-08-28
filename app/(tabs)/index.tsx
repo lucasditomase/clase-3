@@ -6,6 +6,8 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import React from 'react';
 
+// test
+
 //import {Input, Button} from 'react-native-elements';
 
 export default function HomeScreen() {
