@@ -8,6 +8,8 @@ import React from 'react';
 
 // test
 
+// test2
+
 //import {Input, Button} from 'react-native-elements';
 
 export default function HomeScreen() {
