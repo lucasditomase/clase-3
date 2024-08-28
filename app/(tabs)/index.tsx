@@ -1,11 +1,64 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, Button, Text, Alert, TextInput, SafeAreaView, View } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import React from 'react';
+
+//import {Input, Button} from 'react-native-elements';
 
 export default function HomeScreen() {
+
+
+  const [count, setCount] = React.useState(0);
+
+  const createTwoButtonAlert = () =>
+    Alert.alert('Alert Title', 'My Alert Msg', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
+
+
+  const TextInputExample = () => {
+    const [text, onChangeText] = React.useState('Useless Text');
+    const [number, onChangeNumber] = React.useState('');
+
+    return (
+      <SafeAreaView>
+        <TextInput
+          onChangeText={onChangeText}
+          value={text}
+        />
+        <TextInput
+          onChangeText={onChangeNumber}
+          value={number}
+          placeholder="useless placeholder"
+          keyboardType="numeric"
+        />
+      </SafeAreaView>
+    );
+  };
+
+
+  const confirmPassword = () =>
+    new Promise(resolve =>
+      Alert.prompt(
+        'Confirm Password',
+        'Enter your current password for confirmation',
+        [
+          { text: 'Cancel', style: 'destructive', onPress: () => resolve(null) },
+          { text: 'Confirm', onPress: resolve },
+        ],
+        'secure-text',
+      ),
+    );
+
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -16,11 +69,62 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Hola</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
+
+
+        <TextInput placeholder="John" />
+
+        <ThemedText type="subtitle">hfhfg</ThemedText>
+
+
+        <Text style={{ color: "green" }} >jhghjghhgg</Text>
+
+
+
+
+
+        <Text style={{ color: "cyan", fontSize: 100, textAlignVertical: "center", textAlign: "center" }} onPress={() => setCount(0)} >Reset</Text>
+
+        <View style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'center' }}>
+
+
+          <Text style={{ color: "cyan", fontSize: 100 }} onPress={() => setCount(prev => prev + 1)} >+</Text>
+
+          <Text style={{ color: "cyan", fontSize: 100 }} onPress={() => {
+
+            if (count - 1 < 0) { return }
+
+            setCount(prev => prev - 1)
+
+          }} > - </Text>
+
+
+        </View>
+
+
+
+        <TextInput textAlign={'center'} style={{ color: "cyan", fontSize: 100 }} value={`${count}`} onChangeText={() => { }} />
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <Button title={'2-Button Alert'} onPress={createTwoButtonAlert} />
+
+
+        <Button title={'secure'} onPress={confirmPassword} />
+
         <ThemedText>
           Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
           Press{' '}
